@@ -26,7 +26,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('dashboard.question.create');
+        return view('dashboard.question.create',['question' =>new Question()]);
     }
 
     /**
