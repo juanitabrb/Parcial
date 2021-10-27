@@ -15,7 +15,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('dashboard.question.index');
+        $questions= Question::orderBy('id', 'ASC')->paginate(10);
+        return view('dashboard.question.index',['questions'=>$questions]);
     }
 
     /**
@@ -59,7 +60,7 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        return view('dashboard.question.edit', ['question'=>$question]);
     }
 
     /**
@@ -69,9 +70,10 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(QuestionStore $request, Question $question)
     {
-        //
+        $question ->update($request ->validated());
+        return back()->with('status','Parcial actualizado con éxito');
     }
 
     /**
